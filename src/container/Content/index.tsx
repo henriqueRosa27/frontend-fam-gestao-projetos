@@ -1,0 +1,36 @@
+import { FC, useState } from "react";
+
+import { useStyles } from "./styles";
+import { NavbarContainer } from "../Navbar";
+import { SidebarContainer } from "../Sidebar";
+import { BackdropContainer } from "../Backdrop";
+import { BreadcrumbsComponent } from "../../components/Breadcrumbs";
+
+interface ContentContainerProps {
+  children: JSX.Element | JSX.Element[];
+}
+
+export const ContentContainer: FC<ContentContainerProps> = ({
+  children,
+}: ContentContainerProps) => {
+  const classes = useStyles();
+  const [drawerIsOpen, setDrawerIsOpen] = useState(true);
+
+  const toogleDrawer = (): void => {
+    setDrawerIsOpen(!drawerIsOpen);
+  };
+
+  return (
+    <div className={classes.root}>
+      <BackdropContainer />
+      <NavbarContainer toogleDrawer={toogleDrawer} />
+      <SidebarContainer open={drawerIsOpen} />
+
+      <main className={classes.main}>
+        <div className={classes.toolbar} />
+        <BreadcrumbsComponent />
+        <div className={classes.content}>{children}</div>
+      </main>
+    </div>
+  );
+};

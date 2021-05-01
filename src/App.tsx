@@ -1,22 +1,19 @@
-import React, { FC } from "react";
-import "./App.css";
+import { FC } from "react";
+import { ThemeProvider } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { StoreProvider } from "./store/StoreProvider";
+
+import { Routes } from "./routes";
+import theme from "./theme";
 
 const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes />
+      </ThemeProvider>
+    </StoreProvider>
   );
 };
 

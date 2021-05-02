@@ -4,6 +4,7 @@ import { useStyles } from "./styles";
 import { NavbarContainer } from "../Navbar";
 import { SidebarContainer } from "../Sidebar";
 import { BackdropContainer } from "../Backdrop";
+import { SnackbarContainer } from "../Snackbar";
 import { BreadcrumbsComponent } from "../../components/Breadcrumbs";
 
 interface ContentContainerProps {
@@ -22,6 +23,7 @@ export const ContentContainer: FC<ContentContainerProps> = ({
 
   return (
     <div className={classes.root}>
+      <SnackbarContainer />
       <BackdropContainer />
       <NavbarContainer toogleDrawer={toogleDrawer} />
       <SidebarContainer open={drawerIsOpen} />

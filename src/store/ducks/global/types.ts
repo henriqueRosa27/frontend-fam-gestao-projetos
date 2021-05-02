@@ -4,8 +4,8 @@ import { Action } from "redux";
  * Action types
  */
 export enum GlobalTypes {
-  OPEN_LOADING = "@global/OPEN_LOADING",
-  CLOSE_LOADING = "@global/CLOSE_LOADING",
+  OPEN_LOADING = "OPEN_LOADING",
+  CLOSE_LOADING = "CLOSE_LOADING",
 }
 
 /**

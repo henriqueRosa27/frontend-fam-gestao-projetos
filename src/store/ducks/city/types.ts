@@ -4,8 +4,8 @@ import { Action } from "redux";
  * Action types
  */
 export enum CityTypes {
-  LOAD_CITIES_REQUEST = "@cities/LOAD_CITIES_REQUEST",
-  LOAD_CITIES_SUCCESS = "@cities/LOAD_CITIES_SUCCESS",
+  LOAD_CITIES_REQUEST = "LOAD_CITIES_REQUEST",
+  LOAD_CITIES_SUCCESS = "LOAD_CITIES_SUCCESS",
 }
 
 /**

@@ -17,4 +17,5 @@ const itens: Itens[] = [
     route: "cidades",
   },
 ];
+
 export default itens;

@@ -8,7 +8,7 @@ interface BackdropComponent {
   open: boolean;
 }
 
-export const BackdropComponent: FC<BackdropComponent> = ({
+const BackdropComponent: FC<BackdropComponent> = ({
   open,
 }: BackdropComponent) => {
   const classes = useStyles();
@@ -21,3 +21,5 @@ export const BackdropComponent: FC<BackdropComponent> = ({
     </div>
   );
 };
+
+export { BackdropComponent };

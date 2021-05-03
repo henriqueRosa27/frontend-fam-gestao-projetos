@@ -4,10 +4,14 @@ import { SidebarComponent } from "../../components";
 
 interface SidebarContainerProps {
   open: boolean;
+  toogleDrawer: () => void;
 }
 
-export const SidebarContainer: FC<SidebarContainerProps> = ({
+const SidebarContainer: FC<SidebarContainerProps> = ({
   open,
+  toogleDrawer,
 }: SidebarContainerProps) => {
-  return <SidebarComponent open={open} />;
+  return <SidebarComponent open={open} toogleDrawer={toogleDrawer} />;
 };
+
+export { SidebarContainer };

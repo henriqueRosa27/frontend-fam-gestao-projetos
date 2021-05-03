@@ -30,7 +30,7 @@ const columns = [
   },
 ];
 
-export const ListCitiesContainer: FC = () => {
+const ListCitiesContainer: FC = () => {
   const dispatch = useDispatch();
   const { data } = useSelector(getCityState);
 
@@ -54,3 +54,5 @@ export const ListCitiesContainer: FC = () => {
     </ContainerComponent>
   );
 };
+
+export { ListCitiesContainer };

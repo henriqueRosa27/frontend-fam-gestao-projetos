@@ -12,7 +12,7 @@ import Itens from "./itens";
 import history from "../../routes/history";
 import { useStyles, popoverStyle } from "./styles";
 
-export const ListItems: FC = () => {
+const ListItems: FC = () => {
   const classes = useStyles();
   const popoverClasses = popoverStyle();
   const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(
@@ -87,3 +87,5 @@ export const ListItems: FC = () => {
     </List>
   );
 };
+
+export { ListItems };

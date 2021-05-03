@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   buttonRow: {
     display: "flex",
     justifyContent: "flex-end",
@@ -38,3 +38,5 @@ export const useStyles = makeStyles(theme => ({
     },
   },
 }));
+
+export { useStyles };

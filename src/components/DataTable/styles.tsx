@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({
+const useStyles = makeStyles({
   root: {
     width: "80vw",
     borderRadius: "5px",
@@ -71,3 +71,5 @@ export const useStyles = makeStyles({
     },
   },
 });
+
+export { useStyles };

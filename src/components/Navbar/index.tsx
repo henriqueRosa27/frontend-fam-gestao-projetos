@@ -14,7 +14,7 @@ interface NavbarComponentProps {
   toogleDrawer: () => void;
 }
 
-export const NavbarComponent: FC<NavbarComponentProps> = ({
+const NavbarComponent: FC<NavbarComponentProps> = ({
   toogleDrawer,
 }: NavbarComponentProps) => {
   const classes = useStyles();
@@ -43,3 +43,5 @@ export const NavbarComponent: FC<NavbarComponentProps> = ({
     </AppBarComponent>
   );
 };
+
+export { NavbarComponent };

@@ -6,7 +6,7 @@ import { getNotificationState } from "../../store/selectors";
 
 let displayed: SnackbarKey[] = [];
 
-export const SnackbarContainer: FC = () => {
+const SnackbarContainer: FC = () => {
   const { notifications } = useSelector(getNotificationState);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -34,3 +34,5 @@ export const SnackbarContainer: FC = () => {
   }, [notifications, enqueueSnackbar]);
   return null;
 };
+
+export { SnackbarContainer };

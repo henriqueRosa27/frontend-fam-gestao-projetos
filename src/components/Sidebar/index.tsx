@@ -1,24 +1,30 @@
 import { FC } from "react";
-import { Drawer } from "@material-ui/core";
+import { SwipeableDrawer, withWidth, isWidthUp } from "@material-ui/core";
 import clsx from "clsx";
 
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 import { ListItems } from "./listItem";
 import { useStyles } from "./styles";
 
 interface SidebarComponentProps {
   open: boolean;
+  toogleDrawer: () => void;
+  width: Breakpoint;
 }
 
-export const SidebarComponent: FC<SidebarComponentProps> = ({
+const SidebarComponentT: FC<SidebarComponentProps> = ({
   open,
+  toogleDrawer,
+  width,
 }: SidebarComponentProps) => {
   const classes = useStyles();
-
   return (
-    <Drawer
-      variant="permanent"
+    <SwipeableDrawer
+      variant={isWidthUp("sm", width) ? "permanent" : "temporary"}
       anchor="left"
       open={open}
+      onOpen={toogleDrawer}
+      onClose={toogleDrawer}
       className={clsx(classes.drawer, {
         [classes.drawerOpen]: open,
         [classes.drawerClose]: !open,
@@ -30,6 +36,10 @@ export const SidebarComponent: FC<SidebarComponentProps> = ({
         }),
       }}>
       <ListItems />
-    </Drawer>
+    </SwipeableDrawer>
   );
 };
+
+const SidebarComponent = withWidth()(SidebarComponentT);
+
+export { SidebarComponent };

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const CustomChip: FC<CustomChipProps> = ({
+const CustomChip: FC<CustomChipProps> = ({
   label,
   onRemoveFilter,
 }: CustomChipProps) => {
@@ -33,3 +33,5 @@ export const CustomChip: FC<CustomChipProps> = ({
     />
   );
 };
+
+export { CustomChip };

@@ -6,8 +6,10 @@ interface NavbarContainerProps {
   toogleDrawer: () => void;
 }
 
-export const NavbarContainer: FC<NavbarContainerProps> = ({
+const NavbarContainer: FC<NavbarContainerProps> = ({
   toogleDrawer,
 }: NavbarContainerProps) => {
   return <NavbarComponent toogleDrawer={toogleDrawer} />;
 };
+
+export { NavbarContainer };

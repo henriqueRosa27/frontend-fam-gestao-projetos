@@ -5,7 +5,7 @@ import { Typography, Breadcrumbs, Link } from "@material-ui/core";
 import BreadcrumbMap from "./breadcrumbMap";
 import { useStyles } from "./styles";
 
-export const BreadcrumbsComponent: FC = () => {
+const BreadcrumbsComponent: FC = () => {
   const classes = useStyles();
   const location = useLocation();
 
@@ -41,3 +41,5 @@ export const BreadcrumbsComponent: FC = () => {
     </div>
   );
 };
+
+export { BreadcrumbsComponent };

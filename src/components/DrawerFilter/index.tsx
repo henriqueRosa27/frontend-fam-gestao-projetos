@@ -3,7 +3,7 @@ import { Drawer } from "@material-ui/core";
 
 import { useStyles } from "./styles";
 
-export const DrawerFilterComponent: FC = () => {
+const DrawerFilterComponent: FC = () => {
   const classes = useStyles();
   return (
     <Drawer anchor="right" open={false}>
@@ -18,3 +18,5 @@ export const DrawerFilterComponent: FC = () => {
     </Drawer>
   );
 };
+
+export { DrawerFilterComponent };

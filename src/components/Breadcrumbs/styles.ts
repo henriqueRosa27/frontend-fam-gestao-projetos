@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "80vw",
     margin: "0 auto",
@@ -16,3 +16,5 @@ export const useStyles = makeStyles(() => ({
     fontWeight: 500,
   },
 }));
+
+export { useStyles };

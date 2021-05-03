@@ -11,7 +11,7 @@ interface ContentContainerProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export const ContentContainer: FC<ContentContainerProps> = ({
+const ContentContainer: FC<ContentContainerProps> = ({
   children,
 }: ContentContainerProps) => {
   const classes = useStyles();
@@ -26,7 +26,7 @@ export const ContentContainer: FC<ContentContainerProps> = ({
       <SnackbarContainer />
       <BackdropContainer />
       <NavbarContainer toogleDrawer={toogleDrawer} />
-      <SidebarContainer open={drawerIsOpen} />
+      <SidebarContainer open={drawerIsOpen} toogleDrawer={toogleDrawer} />
 
       <main className={classes.main}>
         <div className={classes.toolbar} />
@@ -36,3 +36,5 @@ export const ContentContainer: FC<ContentContainerProps> = ({
     </div>
   );
 };
+
+export { ContentContainer };

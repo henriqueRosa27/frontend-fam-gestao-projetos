@@ -27,7 +27,7 @@ interface DataAlert {
   icon: JSX.Element;
 }
 
-export const SnackbarComponent: FC<SnackbarComponentProps> = ({
+const SnackbarComponent: FC<SnackbarComponentProps> = ({
   snackbarKey,
   message,
   type,
@@ -92,3 +92,5 @@ export const SnackbarComponent: FC<SnackbarComponentProps> = ({
     </SnackbarContent>
   );
 };
+
+export { SnackbarComponent };

@@ -1,8 +1,9 @@
 import { makeStyles } from "@material-ui/core";
+import LogoFundacao from "../../assets/images/Logo_Fundação.jpg";
 
 const drawerWidth = 240;
 
-export const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -17,11 +18,12 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 60,
     height: "calc(100% - 60px)",
     [theme.breakpoints.down("xs")]: {
-      marginTop: 48,
-      height: "calc(100% - 48px)",
+      marginTop: 0,
+      height: "100%",
     },
-    background:
-      "linear-gradient(-206deg, rgba(149, 34, 39, 0.95) 35%, rgba(149, 34, 39, 0.6))",
+    backgroundImage: `linear-gradient(to bottom, rgba(149, 34, 39, 0.95) 35%, rgba(149, 34, 39, 0.6)), url(${LogoFundacao})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "240px 100%",
     borderBottomRightRadius: 30,
     borderTopRightRadius: 30,
   },
@@ -33,8 +35,8 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 60,
     height: "calc(100% - 60px)",
     [theme.breakpoints.down("xs")]: {
-      marginTop: 48,
-      height: "calc(100% - 48px)",
+      marginTop: 0,
+      height: "100%",
     },
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
@@ -57,7 +59,7 @@ export const useStyles = makeStyles(theme => ({
   listItemText: { color: "white" },
 }));
 
-export const popoverStyle = makeStyles(theme => ({
+const popoverStyle = makeStyles(theme => ({
   popover: {
     pointerEvents: "none",
   },
@@ -69,3 +71,5 @@ export const popoverStyle = makeStyles(theme => ({
       "linear-gradient(-206deg, rgba(149, 34, 39, 0.1) 60%, rgba(149, 34, 39, 0.05))",
   },
 }));
+
+export { useStyles, popoverStyle };

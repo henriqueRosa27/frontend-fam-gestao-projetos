@@ -1,4 +1,4 @@
-export interface DataTableComponentProps {
+interface DataTableComponentProps {
   totalRows: number;
   data: any[];
   title: string;
@@ -10,12 +10,12 @@ export interface DataTableComponentProps {
   alterSort?: (propertie: string) => void;
 }
 
-export interface FilterProps {
+interface FilterProps {
   propertie: string;
   label: string;
 }
 
-export interface ColumnsProps {
+interface ColumnsProps {
   name?: string;
   propertie: string;
   sortable?: boolean;
@@ -23,3 +23,5 @@ export interface ColumnsProps {
   customRenderCellContent?: (data: any) => string;
   customRenderCell?: (data: unknown) => JSX.Element;
 }
+
+export type { DataTableComponentProps, FilterProps, ColumnsProps };

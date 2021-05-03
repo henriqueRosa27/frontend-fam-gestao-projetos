@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 
 import { useStyles } from "./styles";
 
-export const HeadDatableComponent: FC = () => {
+const HeadDatableComponent: FC = () => {
   const classes = useStyles();
 
   return (
@@ -22,3 +22,5 @@ export const HeadDatableComponent: FC = () => {
     </div>
   );
 };
+
+export { HeadDatableComponent };

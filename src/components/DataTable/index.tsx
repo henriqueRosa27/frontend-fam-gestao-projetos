@@ -15,7 +15,7 @@ import { useStyles } from "./styles";
 import { DataTableComponentProps } from "./interfaces";
 import { CustomChip } from "./components";
 
-export const DataTableComponent: FC<DataTableComponentProps> = ({
+const DataTableComponent: FC<DataTableComponentProps> = ({
   totalRows,
   data,
   title,
@@ -137,3 +137,5 @@ export const DataTableComponent: FC<DataTableComponentProps> = ({
     </div>
   );
 };
+
+export { DataTableComponent };

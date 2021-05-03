@@ -2,30 +2,30 @@ import styled from "styled-components";
 import { AppBar, makeStyles, Typography } from "@material-ui/core";
 import { ExitToAppOutlined } from "@material-ui/icons";
 
-export const Grow = styled.div`
+const Grow = styled.div`
   flex-grow: 1;
 `;
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: "100%";
 `;
 
-export const AppBarComponent = styled(AppBar)`
+const AppBarComponent = styled(AppBar)`
   background-color: #fff;
 `;
 
-export const ExitIcon = styled(ExitToAppOutlined)`
+const ExitIcon = styled(ExitToAppOutlined)`
   margin-left: 10px;
 `;
 
-export const Titulo = styled(Typography)`
+const Titulo = styled(Typography)`
   color: #952227;
 `;
 
-export const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -55,3 +55,5 @@ export const useStyles = makeStyles(theme => ({
     },
   },
 }));
+
+export { useStyles, Titulo, ExitIcon, AppBarComponent, Container, Grow };

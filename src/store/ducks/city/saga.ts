@@ -1,38 +1,27 @@
-import { takeLatest, put, all } from "redux-saga/effects";
+import { takeLatest, put, all, call } from "redux-saga/effects";
 
 import { Creators as cityCreators } from "./index";
-import { Creators as notificationCreators } from "../notification/index";
+import { Creators as notificationCreators } from "../notification";
+import { Creators as globalCreators } from "../global";
 import { CityTypes } from "./types";
-
-const data = [
-  {
-    id: "1",
-    name: "adopgbsa",
-    status: true,
-  },
-  {
-    id: "2",
-    name: "adopasdasdgbsa",
-    status: true,
-  },
-  {
-    id: "3",
-    name: "adopdasdgbsa",
-    status: true,
-  },
-];
+import { getAllCitiesService } from "../../../services/cidade";
 
 function* getAllCities() {
   try {
+    yield put(globalCreators.openLoading());
+
+    const { data } = yield call(getAllCitiesService);
+
     yield put(cityCreators.loadCitiesSuccess(data));
+  } catch (e) {
     yield put(
       notificationCreators.pushNotification({
-        type: "success",
+        type: "error",
         content: "sdivdsoyfvd",
       })
     );
-  } catch (e) {
-    console.log(e);
+  } finally {
+    yield put(globalCreators.closeLoading());
   }
 }
 

@@ -44,8 +44,8 @@ export const useStyles = makeStyles({
     paddingLeft: "2rem",
     lineHeight: "1.5",
     fontWeight: 600,
-    ":hover": {
-      color: "red",
+    "& :hover": {
+      color: "rgb(149, 34, 39) !important",
     },
   },
   divHead: {
@@ -64,6 +64,10 @@ export const useStyles = makeStyles({
     "& .MuiTableCell-root": {
       paddingLeft: "2rem",
       borderBottom: "none",
+    },
+
+    "&:hover": {
+      backgroundColor: "rgba(149, 34, 39, 0.1) !important",
     },
   },
 });

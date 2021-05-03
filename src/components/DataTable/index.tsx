@@ -95,11 +95,16 @@ export const DataTableComponent: FC<DataTableComponentProps> = ({
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                {columns.map(column => {
-                  if (column.sortable)
-                    return renderSortableColumn(column.propertie, column.name);
-                  return renderColumnDefault(column.propertie, column.name);
-                })}
+                {columns
+                  .filter(column => !column.visible && column.visible !== false)
+                  .map(column => {
+                    if (column.sortable)
+                      return renderSortableColumn(
+                        column.propertie,
+                        column.name
+                      );
+                    return renderColumnDefault(column.propertie, column.name);
+                  })}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -107,19 +112,22 @@ export const DataTableComponent: FC<DataTableComponentProps> = ({
                 <TableRow
                   className={classes.tableRow}
                   hover
-                  role="checkbox"
                   tabIndex={-1}
                   key={row.id}>
-                  {columns.map(column => (
-                    <TableCell
-                      key={column.propertie}
-                      align="left"
-                      style={{ cursor: "pointer" }}>
-                      {column.customRenderCellContent
-                        ? column.customRenderCellContent(row)
-                        : row[column.propertie]}
-                    </TableCell>
-                  ))}
+                  {columns
+                    .filter(
+                      column => !column.visible && column.visible !== false
+                    )
+                    .map(column => (
+                      <TableCell
+                        key={column.propertie}
+                        align="left"
+                        style={{ cursor: "pointer" }}>
+                        {column.customRenderCellContent
+                          ? column.customRenderCellContent(row)
+                          : row[column.propertie]}
+                      </TableCell>
+                    ))}
                 </TableRow>
               ))}
             </TableBody>

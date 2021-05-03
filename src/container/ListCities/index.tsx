@@ -15,17 +15,18 @@ const columns = [
   {
     name: "id",
     propertie: "id",
+    visible: false,
   },
   {
     name: "Nome",
-    propertie: "name",
+    propertie: "nome",
     sortable: true,
   },
   {
-    name: "Status",
-    propertie: "status",
-    customRenderCellContent: ({ status }: { status: boolean }) =>
-      status ? "Ativo" : "Inativo",
+    name: "Ativo",
+    propertie: "ativo",
+    customRenderCellContent: ({ ativo }: { ativo: boolean }) =>
+      ativo ? "Ativo" : "Inativo",
   },
 ];
 

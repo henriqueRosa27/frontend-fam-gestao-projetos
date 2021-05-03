@@ -21,7 +21,7 @@ export const SnackbarProvider: FC<SnackbarProvider> = ({
   return (
     <SnackbarProviderComponent
       maxSnack={3}
-      autoHideDuration={100000}
+      autoHideDuration={4000}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",

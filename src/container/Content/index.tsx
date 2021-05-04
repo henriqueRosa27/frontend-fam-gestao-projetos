@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 
-import { BreadcrumbsComponent } from "../../components/Breadcrumbs";
+import { BreadcrumbsComponent } from "src/components/Breadcrumbs";
+import { NavbarContainer } from "src/container/Common/Navbar";
+import { SidebarContainer } from "src/container/Common/Sidebar";
+import { BackdropContainer } from "src/container/Backdrop";
+import { SnackbarContainer } from "src/container/Common/Snackbar";
 import { useStyles } from "./styles";
-import { NavbarContainer } from "../Common/Navbar";
-import { SidebarContainer } from "../Common/Sidebar";
-import { BackdropContainer } from "../Backdrop";
-import { SnackbarContainer } from "../Common/Snackbar";
 
 interface ContentContainerProps {
   children: JSX.Element | JSX.Element[];

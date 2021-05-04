@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ListCitiesContainer } from "../../container";
+import { ListCitiesContainer } from "src/container";
 
 const Home: FC = () => {
   return <ListCitiesContainer />;

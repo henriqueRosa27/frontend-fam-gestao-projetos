@@ -2,7 +2,7 @@ import { FC, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 
-import { ContentContainer } from "../container";
+import { ContentContainer } from "src/container";
 import history from "./history";
 import { autenticate } from "./routes";
 

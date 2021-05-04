@@ -2,7 +2,7 @@ import { SnackbarKey, useSnackbar } from "notistack";
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getNotificationState } from "../../../store/selectors";
+import { getNotificationState } from "src/store/selectors";
 
 let displayed: SnackbarKey[] = [];
 

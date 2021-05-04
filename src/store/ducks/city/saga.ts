@@ -1,6 +1,6 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 
-import { getAllCitiesService } from "../../../services/cidade";
+import { getAllCitiesService } from "src/services/cidade";
 import { Creators as cityCreators } from "./index";
 import { Creators as notificationCreators } from "../notification";
 import { Creators as globalCreators } from "../global";

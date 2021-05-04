@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import LogoFundacao from "../../assets/images/Logo_Fundação.jpg";
+import LogoFundacao from "src/assets/images/Logo_Fundação.jpg";
 
 const drawerWidth = 240;
 

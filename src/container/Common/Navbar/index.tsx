@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { NavbarComponent } from "../../../components";
+import { NavbarComponent } from "src/components";
 
 interface NavbarContainerProps {
   toogleDrawer: () => void;

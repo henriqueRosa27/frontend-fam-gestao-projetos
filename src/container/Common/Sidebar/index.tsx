@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { SidebarComponent } from "@app/components";
+import { SidebarComponent } from "../../../components";
 
 interface SidebarContainerProps {
   open: boolean;

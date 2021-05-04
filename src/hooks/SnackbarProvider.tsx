@@ -3,7 +3,7 @@ import {
   SnackbarProvider as SnackbarProviderComponent,
   SnackbarKey,
 } from "notistack";
-import { SnackbarComponent } from "@app/components/Snackbar";
+import { SnackbarComponent } from "../components/Snackbar";
 
 interface SnackbarProvider {
   children: JSX.Element;

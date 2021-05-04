@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { ThemeProvider } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { StoreProvider } from "@app/store/StoreProvider";
-import { SnackbarProvider } from "@app/hooks/SnackbarProvider";
+import { StoreProvider } from "./store/StoreProvider";
+import { SnackbarProvider } from "./hooks/SnackbarProvider";
 
 import { Routes } from "./routes";
 import theme from "./theme";

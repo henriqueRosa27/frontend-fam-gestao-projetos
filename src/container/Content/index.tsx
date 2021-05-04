@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { BreadcrumbsComponent } from "@app/components/Breadcrumbs";
+import { BreadcrumbsComponent } from "../../components/Breadcrumbs";
 import { useStyles } from "./styles";
 import { NavbarContainer } from "../Common/Navbar";
 import { SidebarContainer } from "../Common/Sidebar";

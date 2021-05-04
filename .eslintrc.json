@@ -42,7 +42,12 @@
   },
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "moduleDirectory": ["node_modules", "src/"]
+      },
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"]
+      }
     }
   }
 }

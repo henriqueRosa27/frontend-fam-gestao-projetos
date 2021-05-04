@@ -12,7 +12,7 @@ import { Box, IconButton } from "@material-ui/core";
 import { SnackbarContent, SnackbarKey, useSnackbar } from "notistack";
 import clsx from "clsx";
 
-import { Creators as notificationCreators } from "../../store/ducks/notification";
+import { Creators as notificationCreators } from "@app/store/ducks/notification";
 import { useStyles } from "./styles";
 
 interface SnackbarComponentProps {

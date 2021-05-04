@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Creators as cityCreator } from "../../store/ducks/city";
-import { getCityState } from "../../store/selectors";
+import { Creators as cityCreator } from "@app/store/ducks/city";
+import { getCityState } from "@app/store/selectors";
 
 import {
   HeadDatableComponent,

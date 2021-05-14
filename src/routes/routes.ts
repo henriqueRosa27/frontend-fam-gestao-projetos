@@ -7,6 +7,7 @@ interface Routes {
 
 const HomePage = lazy(() => import("../views/Home"));
 const ListCitiespage = lazy(() => import("../views/ListCities"));
+const FormCitiespage = lazy(() => import("../views/FormCities"));
 
 const autenticate: Routes[] = [
   {
@@ -16,6 +17,10 @@ const autenticate: Routes[] = [
   {
     path: "/cidades",
     component: ListCitiespage,
+  },
+  {
+    path: "/cidades/criar",
+    component: FormCitiespage,
   },
 ];
 

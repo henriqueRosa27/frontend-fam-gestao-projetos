@@ -13,8 +13,8 @@ const itens: Itens[] = [
   },
   {
     name: "Cidades",
-    icon: <ChildFriendly />,
-    route: "cidades",
+    icon: <Home />,
+    route: "/cidades",
   },
 ];
 

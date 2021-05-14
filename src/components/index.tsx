@@ -6,3 +6,4 @@ export { DataTableComponent } from "./DataTable";
 export { BackdropComponent } from "./Backdrop";
 export { SidebarComponent } from "./Sidebar";
 export { NavbarComponent } from "./Navbar";
+export { InputFieldComponent } from "./InputField";

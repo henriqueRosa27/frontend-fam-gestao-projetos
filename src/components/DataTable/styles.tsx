@@ -49,8 +49,6 @@ const useStyles = makeStyles({
     },
   },
   divHead: {
-    display: "flex",
-    alignItems: "center",
     "& .MuiTableSortLabel-icon": {
       color: "black",
     },
@@ -67,7 +65,7 @@ const useStyles = makeStyles({
     },
 
     "&:hover": {
-      backgroundColor: "rgba(149, 34, 39, 0.1) !important",
+      backgroundColor: "rgba(135, 117, 0, 0.1) !important",
     },
   },
 });

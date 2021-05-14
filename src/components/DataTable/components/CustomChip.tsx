@@ -29,7 +29,7 @@ const CustomChip: FC<CustomChipProps> = ({
       label={label}
       className={classes.chip}
       onDelete={() => onRemoveFilter()}
-      style={{ marginRight: "5px", background: "#450e13" }}
+      style={{ marginRight: "5px", background: "#524000" }}
     />
   );
 };

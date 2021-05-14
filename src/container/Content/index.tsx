@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { BreadcrumbsComponent } from "src/components/Breadcrumbs";
 import { NavbarContainer } from "src/container/Common/Navbar";
 import { SidebarContainer } from "src/container/Common/Sidebar";
-import { BackdropContainer } from "src/container/Backdrop";
+import { BackdropContainer } from "src/container/Common/Backdrop";
 import { SnackbarContainer } from "src/container/Common/Snackbar";
 import { useStyles } from "./styles";
 

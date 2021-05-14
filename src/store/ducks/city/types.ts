@@ -6,6 +6,7 @@ import { Action } from "redux";
 export enum CityTypes {
   LOAD_CITIES_REQUEST = "LOAD_CITIES_REQUEST",
   LOAD_CITIES_SUCCESS = "LOAD_CITIES_SUCCESS",
+  CREATE_CITY_REQUEST = "CREATE_CITY_REQUEST",
 }
 
 /**
@@ -20,8 +21,8 @@ export interface CityState {
  */
 export interface CityData {
   id: string;
-  name: string;
-  status: boolean;
+  nome: string;
+  ativo: boolean;
 }
 
 /**
@@ -34,12 +35,19 @@ export interface ILoadCitiesSuccess
   data: CityData[];
 }
 
+export interface ICreateCityRequest
+  extends Action<CityTypes.LOAD_CITIES_SUCCESS> {
+  nome: string;
+}
+
 export interface CityActionsTypes {
   [CityTypes.LOAD_CITIES_REQUEST]: string;
   [CityTypes.LOAD_CITIES_SUCCESS]: string;
+  [CityTypes.CREATE_CITY_REQUEST]: string;
 }
 
 export interface CityActions {
   loadCitiesRequest: () => ILoadCitiesRequest;
   loadCitiesSuccess: (data: CityData[]) => ILoadCitiesSuccess;
+  createCityRequest: (nome: string) => ICreateCityRequest;
 }

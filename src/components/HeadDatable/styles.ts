@@ -28,13 +28,13 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1),
       padding: "6px 29px",
       borderRadius: "30px",
-      backgroundColor: "#952227",
+      backgroundColor: "#524000",
       boxShadow: "none",
       textTransform: "none",
       color: "white",
     },
     "& .MuiButton-contained:hover": {
-      backgroundColor: "#952227",
+      backgroundColor: "#524000",
     },
   },
 }));

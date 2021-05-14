@@ -45,7 +45,6 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
     if (activeSort(propertie) && orderDirection) {
       return orderDirection;
     }
-
     return undefined;
   };
 

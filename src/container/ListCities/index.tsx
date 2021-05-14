@@ -23,7 +23,7 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Ativo",
+    name: "Status",
     propertie: "ativo",
     customRenderCellContent: ({ ativo }: { ativo: boolean }) =>
       ativo ? "Ativo" : "Inativo",

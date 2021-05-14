@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import { useStyles } from "./styles";
 
@@ -9,7 +10,11 @@ const HeadDatableComponent: FC = () => {
   return (
     <div className={classes.buttonRow}>
       <div className={classes.rootAddButton}>
-        <Button variant="outlined" color="primary">
+        <Button
+          component={Link}
+          to="/cidades/criar"
+          variant="outlined"
+          color="primary">
           Cadastrar
         </Button>
       </div>

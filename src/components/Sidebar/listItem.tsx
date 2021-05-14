@@ -7,9 +7,9 @@ import {
   Popover,
   Typography,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import Itens from "./itens";
-import history from "../../routes/history";
 import { useStyles, popoverStyle } from "./styles";
 
 const ListItems: FC = () => {
@@ -33,10 +33,6 @@ const ListItems: FC = () => {
     setPopoverId(null);
   };
 
-  const redirect = (route: string) => {
-    history.push(route);
-  };
-
   return (
     <List style={{ paddingTop: 0, marginTop: 15 }}>
       {Itens.map(item => (
@@ -46,11 +42,7 @@ const ListItems: FC = () => {
               handleMouseEnter(e, item.name);
             }}
             onMouseLeave={handleMouseLeave}>
-            <ListItem
-              button
-              onClick={() => {
-                redirect(item.route);
-              }}>
+            <ListItem button component={Link} to={item.route}>
               <ListItemIcon className={classes.listItemIcon}>
                 {item.icon}
               </ListItemIcon>

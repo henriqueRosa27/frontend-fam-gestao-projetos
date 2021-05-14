@@ -5,14 +5,14 @@ const useStyles = makeStyles(() => ({
     width: "80vw",
     margin: "0 auto",
     padding: "14px 7px",
-    color: "#952227",
+    color: "#524000",
   },
   text: {
-    color: "#952227",
+    color: "#524000",
     fontWeight: 600,
   },
   link: {
-    color: "#952227",
+    color: "#524000",
     fontWeight: 500,
   },
 }));

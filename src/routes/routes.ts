@@ -1,6 +1,7 @@
 import { lazy, LazyExoticComponent, FC } from "react";
 
 interface Routes {
+  key?: string;
   path: string;
   component: LazyExoticComponent<FC>;
 }
@@ -20,6 +21,11 @@ const autenticate: Routes[] = [
   },
   {
     path: "/cidades/criar",
+    component: FormCitiespage,
+  },
+  {
+    key: "t",
+    path: "/cidades/editar/:id",
     component: FormCitiespage,
   },
 ];

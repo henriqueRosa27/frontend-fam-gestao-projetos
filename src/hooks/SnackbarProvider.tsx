@@ -10,7 +10,7 @@ interface SnackbarProvider {
 }
 
 interface Message {
-  message: string;
+  message: { title: string; content: string | string[] };
   variant: "success" | "error" | "warning" | "info";
   key: SnackbarKey;
 }

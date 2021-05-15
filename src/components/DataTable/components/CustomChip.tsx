@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { makeStyles, Chip } from "@material-ui/core";
 
+import { COLORS } from "src/styles/colors";
+
 interface CustomChipProps {
   label: string;
   onRemoveFilter: () => void;
@@ -29,7 +31,7 @@ const CustomChip: FC<CustomChipProps> = ({
       label={label}
       className={classes.chip}
       onDelete={() => onRemoveFilter()}
-      style={{ marginRight: "5px", background: "#524000" }}
+      style={{ marginRight: "5px", background: COLORS.main.hex }}
     />
   );
 };

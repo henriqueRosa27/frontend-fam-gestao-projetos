@@ -18,7 +18,10 @@ import { useStyles } from "./styles";
 interface SnackbarComponentProps {
   snackbarKey: SnackbarKey;
   storeKey: SnackbarKey;
-  message: string | string[];
+  message: {
+    title: string;
+    content: string | string[];
+  };
   type: "success" | "error" | "warning" | "info";
 }
 
@@ -59,12 +62,12 @@ const SnackbarComponent: FC<SnackbarComponentProps> = ({
   }
 
   const renderContent = (): JSX.Element | JSX.Element[] => {
-    if (typeof message === "string") {
-      return <span>{message}</span>;
+    if (typeof message.content === "string") {
+      return <span>{message.content}</span>;
     }
-    return message.map(data => (
-      <span key={Math.random() + Date.now()}>{data}</span>
-    ));
+    return message.content.map(data => {
+      return <span key={Math.random() + Date.now()}>{data}</span>;
+    });
   };
 
   return (
@@ -85,7 +88,11 @@ const SnackbarComponent: FC<SnackbarComponentProps> = ({
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }>
-          <AlertTitle className={classes.alertTitle}>title</AlertTitle>
+          {message.title && (
+            <AlertTitle className={classes.alertTitle}>
+              {message.title}
+            </AlertTitle>
+          )}
           <div className={classes.alertMessage}>{renderContent()}</div>
         </Alert>
       </Box>

@@ -62,11 +62,15 @@ const useStyles = makeStyles({
     "& .MuiTableCell-root": {
       paddingLeft: "2rem",
       borderBottom: "none",
+      height: 20,
     },
 
     "&:hover": {
       backgroundColor: "rgba(135, 117, 0, 0.1) !important",
     },
+  },
+  tableRowCursor: {
+    cursor: "pointer",
   },
 });
 

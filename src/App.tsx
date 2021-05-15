@@ -4,8 +4,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StoreProvider } from "src/store/StoreProvider";
 import { SnackbarProvider } from "src/hooks/SnackbarProvider";
 
-import { Routes } from "./routes";
-import theme from "./theme";
+import theme from "src/styles/theme";
+import { Routes } from "src/routes";
 
 const App: FC = () => {
   return (

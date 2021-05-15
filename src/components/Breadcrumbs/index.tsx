@@ -7,9 +7,18 @@ import { useStyles } from "./styles";
 
 const BreadcrumbsComponent: FC = () => {
   const classes = useStyles();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
-  const breadcrumbMap = BreadcrumbMap[location.pathname];
+  const hasEdit = pathname.indexOf("/editar/");
+  let location: string;
+
+  if (hasEdit > 0) {
+    location = pathname.slice(0, hasEdit + 7);
+  } else {
+    location = pathname;
+  }
+
+  const breadcrumbMap = BreadcrumbMap[location];
 
   if (!breadcrumbMap) return <></>;
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { TextField } from "@material-ui/core";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { Control, Controller, RegisterOptions } from "react-hook-form";
 
 import { useStyles } from "./styles";
 
@@ -9,8 +9,10 @@ interface InputFieldComponent {
   label: string;
   required?: boolean;
   name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<any>;
-  errors?: string;
+  error?: string;
+  rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
 }
 
 const InputFieldComponent: FC<InputFieldComponent> = ({
@@ -19,9 +21,10 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
   required = false,
   name,
   control,
-  errors,
+  error,
+  rules,
 }: InputFieldComponent) => {
-  const classes = useStyles();
+  const classes = useStyles({ error: !!error });
   return (
     <div id={`form-group-${id}}`} className={classes.root}>
       <label htmlFor={id} className={classes.label}>
@@ -37,15 +40,12 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
             id={id}
             className={classes.input}
             fullWidth
-            error={!!errors}
+            error={!!error}
             variant="outlined"
+            helperText={error}
           />
         )}
-        rules={{
-          required: { value: true, message: "Campo obrigatório" },
-          minLength: { value: 2, message: "Mínimo de 2 caracteres" },
-          maxLength: { value: 50, message: "Máximo de 50 caracteres" },
-        }}
+        rules={rules}
       />
     </div>
   );
@@ -53,7 +53,8 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
 
 InputFieldComponent.defaultProps = {
   required: false,
-  errors: undefined,
+  error: undefined,
+  rules: undefined,
 };
 
 export { InputFieldComponent };

@@ -16,6 +16,7 @@ export const { Types, Creators } = createActions<CityActionsTypes, CityActions>(
     loadCitiesRequest: [],
     loadCitiesSuccess: ["data"],
     createCityRequest: ["nome"],
+    changeStatusCityRequest: ["request"],
   }
 );
 

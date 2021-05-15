@@ -15,7 +15,7 @@ export enum NotificationTypes {
 interface INotification {
   key?: SnackbarKey;
   type: "success" | "error" | "warning" | "info";
-  content: string | string[];
+  content: { title: string; content: string | string[] };
 }
 interface IMessage extends INotification {
   key: SnackbarKey;

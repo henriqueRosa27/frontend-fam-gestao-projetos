@@ -13,7 +13,7 @@ const itens: Itens[] = [
   },
   {
     name: "Cidades",
-    icon: <Home />,
+    icon: <ChildFriendly />,
     route: "/cidades",
   },
 ];

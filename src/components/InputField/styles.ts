@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     padding: "20px",
     fontSize: "0.9rem",
@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
     height: "20px",
     fontSize: "1rem",
     fontWeight: 600,
-    color: "#524000",
+    color: (props: { error: boolean }) =>
+      props.error ? theme.palette.error.main : theme.palette.primary.main,
     display: "block",
     marginBottom: "4px",
   },
@@ -20,10 +21,12 @@ const useStyles = makeStyles(() => ({
     "& .MuiOutlinedInput-root": {
       padding: 10,
       "&:hover fieldset": {
-        borderColor: "#524000",
+        borderColor: (props: { error: boolean }) =>
+          props.error ? theme.palette.error.main : theme.palette.primary.main,
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#524000",
+        borderColor: (props: { error: boolean }) =>
+          props.error ? theme.palette.error.main : theme.palette.primary.main,
       },
     },
     "& .MuiOutlinedInput-input": {

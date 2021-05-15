@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Grid, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-import { InputFieldComponent } from "src/components";
-import { ReactComponent as EditIcon } from "src/assets/icons/Edit.svg";
+import { InputFieldComponent, ButtonComponent } from "src/components";
+import { NoteIcon } from "src/assets/icons";
 import { Creators as cityCreators } from "src/store/ducks/city";
 import { useStyles } from "./styles";
 
@@ -40,7 +40,7 @@ const FormCitiesContainer: FC = () => {
             justifyContent: "spacing-between",
             paddingLeft: "10px",
           }}>
-          <EditIcon />
+          <NoteIcon color="primary" fontSize="large" />
           <h1 className={classes.h1}>Nova cidade</h1>
         </Grid>
         <Grid item xs={12}>
@@ -49,15 +49,27 @@ const FormCitiesContainer: FC = () => {
             label="Nome"
             name="nome"
             control={control}
-            errors={errors?.nome?.message}
+            error={errors?.nome?.message}
+            rules={{
+              required: { value: true, message: "Campo obrigatório" },
+              minLength: { value: 2, message: "Mínimo de 2 caracteres" },
+              maxLength: { value: 50, message: "Máximo de 50 caracteres" },
+            }}
           />
         </Grid>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <div className={classes.buttonSave}>
-            <Button variant="outlined" onClick={handleSubmit(submit)}>
-              Salvar
-            </Button>
-          </div>
+          <ButtonComponent
+            color="primary"
+            variant="outlined"
+            onClick={handleSubmit(submit)}
+            text="Voltar"
+          />
+          <ButtonComponent
+            color="primary"
+            variant="contained"
+            onClick={handleSubmit(submit)}
+            text="Salvar"
+          />
         </div>
       </Grid>
     </div>

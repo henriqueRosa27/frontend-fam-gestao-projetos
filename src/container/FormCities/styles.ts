@@ -23,25 +23,9 @@ const useStyles = makeStyles(theme => ({
   h1: {
     fontSize: "1.5rem",
     fontWeight: 600,
-    color: "#303030",
+    color: theme.palette.primary.main,
     letterSpacing: "0.48px",
     marginLeft: "13px",
-  },
-  buttonSave: {
-    "& > *": {
-      margin: theme.spacing(1),
-      padding: "6px 29px",
-      borderRadius: "30px",
-      boxShadow: "none",
-      textTransform: "none",
-      borderColor: "#524000",
-      color: "#524000",
-    },
-    "& .MuiButton-outlined:hover": {
-      backgroundColor: "#524000",
-      borderColor: "#fff",
-      color: "#fff",
-    },
   },
 }));
 

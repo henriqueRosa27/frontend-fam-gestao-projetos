@@ -2,18 +2,35 @@ import api from "./api";
 
 const ROUTE = "cidades";
 
-export const getAllCitiesService = async () => {
+const getAllCitiesService = async () => {
   return api.get(ROUTE);
 };
 
-export const createCityService = async (data: { nome: string }) => {
-  return api.post(`${ROUTE}`, data);
+const getCityById = async (id: string) => {
+  return api.get(`${ROUTE}/${id}`);
 };
 
-export const inactivateCitiesService = async (id: string) => {
+const createCityService = async (data: { nome: string }) => {
+  return api.post(ROUTE, data);
+};
+
+const updateCityService = async (id: string, data: { nome: string }) => {
+  return api.put(`${ROUTE}/${id}`, data);
+};
+
+const inactivateCitiesService = async (id: string) => {
   return api.delete(`${ROUTE}/${id}`);
 };
 
-export const activateCityService = async (id: string) => {
+const activateCityService = async (id: string) => {
   return api.patch(`${ROUTE}/${id}`);
+};
+
+export {
+  getAllCitiesService,
+  getCityById,
+  createCityService,
+  updateCityService,
+  inactivateCitiesService,
+  activateCityService,
 };

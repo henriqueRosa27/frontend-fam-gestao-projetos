@@ -28,10 +28,8 @@ const useStyles = makeStyles({
     alignContent: "space-between",
   },
   title: {
-    fontSize: "1.5625rem",
     fontWeight: 600,
     letterSpacing: "normal",
-    color: "#303030",
     lineHeight: "1.5",
     margin: "1.125rem 0rem 1.125rem 2rem",
   },

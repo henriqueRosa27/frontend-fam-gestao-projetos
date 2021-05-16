@@ -8,6 +8,7 @@ import {
   TableCell,
   TableSortLabel,
   TableBody,
+  Typography,
 } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -86,7 +87,9 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
       <Paper className={classes.table}>
         <TableContainer>
           <div className={classes.tableToolBar}>
-            <div className={classes.title}>{title}</div>
+            <Typography variant="h5" color="primary" className={classes.title}>
+              {title}
+            </Typography>
             <div style={{ paddingTop: "20px" }}>
               {filters &&
                 filters.map(filter => (
@@ -135,7 +138,9 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
                       }
                       return (
                         <TableCell
-                          key={column.propertie}
+                          key={`${
+                            column.propertie
+                          }-${new Date().getTime()}-${Math.random()}`}
                           align={column.align ? column.align : "center"}
                           style={{ cursor: "pointer" }}>
                           {column.customRenderCellContent

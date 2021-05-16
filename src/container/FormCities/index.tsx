@@ -1,11 +1,14 @@
-import { FC } from "react";
-import { Grid } from "@material-ui/core";
+import { FC, useEffect, useState } from "react";
+import { Grid, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { InputFieldComponent, ButtonComponent } from "src/components";
 import { NoteIcon } from "src/assets/icons";
 import { Creators as cityCreators } from "src/store/ducks/city";
+import history from "src/routes/history";
+import { getCityState } from "src/store/selectors";
 import { useStyles } from "./styles";
 
 const defaultValues = {
@@ -15,19 +18,58 @@ const defaultValues = {
 const FormCitiesContainer: FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const { id } = useParams<{ id: string | undefined }>();
+  const { model } = useSelector(getCityState);
+  const [formState, setFormState] = useState<{ nome: string }>({ nome: "" });
   const {
     handleSubmit,
-    control,
-    formState: { errors },
+    setValue,
+    register,
+    formState: { errors, isValid },
   } = useForm({
     defaultValues,
-    mode: "onChange",
   });
 
+  useEffect(() => {
+    dispatch(cityCreators.clearModelCity());
+    if (id) {
+      dispatch(cityCreators.loadCityByIdRequest(id));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    const nomeModel = model.nome || "";
+    setValue("nome", nomeModel, { shouldDirty: true });
+    setFormState({ nome: nomeModel });
+  }, [model, setValue]);
+
   const submit = ({ nome }: { nome: string }) => {
-    dispatch(cityCreators.createCityRequest(nome));
+    if (id) {
+      dispatch(cityCreators.updateCityRequest(id, nome));
+    } else {
+      dispatch(cityCreators.createCityRequest(nome));
+    }
   };
+
+  const goBack = () => {
+    history.goBack();
+  };
+
+  // poderá ser usado em outros casos
+  // const handleChange = (name: string) => (value: string) => {
+  //   setFormState({...state, formState[name]: value})
+  // };
+
+  const handleChange = () => (value: string) => {
+    setValue("nome", value, { shouldValidate: true });
+    setFormState({ nome: value });
+  };
+
+  register("nome", {
+    required: { value: true, message: "Campo obrigatório" },
+    minLength: { value: 2, message: "Mínimo de 2 caracteres" },
+    maxLength: { value: 50, message: "Máximo de 50 caracteres" },
+  });
 
   return (
     <div className={classes.root}>
@@ -41,32 +83,31 @@ const FormCitiesContainer: FC = () => {
             paddingLeft: "10px",
           }}>
           <NoteIcon color="primary" fontSize="large" />
-          <h1 className={classes.h1}>Nova cidade</h1>
+          <Typography variant="h5" color="primary" className={classes.title}>
+            Nova cidade
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <InputFieldComponent
             id="nome"
             label="Nome"
             name="nome"
-            control={control}
+            value={formState.nome}
             error={errors?.nome?.message}
-            rules={{
-              required: { value: true, message: "Campo obrigatório" },
-              minLength: { value: 2, message: "Mínimo de 2 caracteres" },
-              maxLength: { value: 50, message: "Máximo de 50 caracteres" },
-            }}
+            onChange={handleChange()}
           />
         </Grid>
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <ButtonComponent
             color="primary"
             variant="outlined"
-            onClick={handleSubmit(submit)}
+            onClick={goBack}
             text="Voltar"
           />
           <ButtonComponent
             color="primary"
             variant="contained"
+            disabled={!isValid}
             onClick={handleSubmit(submit)}
             text="Salvar"
           />

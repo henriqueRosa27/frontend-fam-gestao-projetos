@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { TextField } from "@material-ui/core";
-import { Control, Controller, RegisterOptions } from "react-hook-form";
 
 import { useStyles } from "./styles";
 
@@ -9,10 +8,9 @@ interface InputFieldComponent {
   label: string;
   required?: boolean;
   name: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<any>;
   error?: string;
-  rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs">;
+  value: string;
+  onChange: (value: string) => void;
 }
 
 const InputFieldComponent: FC<InputFieldComponent> = ({
@@ -20,9 +18,9 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
   label,
   required = false,
   name,
-  control,
   error,
-  rules,
+  value,
+  onChange,
 }: InputFieldComponent) => {
   const classes = useStyles({ error: !!error });
   return (
@@ -30,22 +28,18 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
       <label htmlFor={id} className={classes.label}>
         {label} {required && <b style={{ color: "#f44336" }}>*</b>}
       </label>
-      <Controller
+      <TextField
         name={name}
-        control={control}
-        render={({ field }) => (
-          <TextField
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...field}
-            id={id}
-            className={classes.input}
-            fullWidth
-            error={!!error}
-            variant="outlined"
-            helperText={error}
-          />
-        )}
-        rules={rules}
+        id={id}
+        className={classes.input}
+        fullWidth
+        error={!!error}
+        variant="outlined"
+        helperText={error}
+        value={value}
+        onChange={e => {
+          onChange(e.target.value);
+        }}
       />
     </div>
   );
@@ -54,7 +48,6 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
 InputFieldComponent.defaultProps = {
   required: false,
   error: undefined,
-  rules: undefined,
 };
 
 export { InputFieldComponent };

@@ -5,28 +5,42 @@ import {
   Switch,
   TableCell,
   IconButton,
+  Typography,
 } from "@material-ui/core";
 import { Edit as EditIcon } from "@material-ui/icons";
 
+import { DataTableComponent, ContainerComponent } from "src/components";
 import { Creators as cityCreator } from "src/store/ducks/city";
 import { getCityState } from "src/store/selectors";
 import { ColumnProps } from "src/components/interfaces";
 import history from "src/routes/history";
-
-import {
-  HeadDatableComponent,
-  ContainerComponent,
-  DrawerFilterComponent,
-  DataTableComponent,
-} from "../../components";
+import { DrawerFilter } from "./components";
 
 const ListCitiesContainer: FC = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector(getCityState);
+  const { dataList } = useSelector(getCityState);
 
   useEffect(() => {
     dispatch(cityCreator.loadCitiesRequest());
   }, [dispatch]);
+
+  const changePage = (page: number) => {
+    dispatch(
+      cityCreator.loadCitiesRequest({
+        pagina: page + 1,
+        tamanho: dataList.size,
+      })
+    );
+  };
+
+  const changeRowsPerPage = (tamanho: string) => {
+    dispatch(
+      cityCreator.loadCitiesRequest({
+        pagina: 1,
+        tamanho: +tamanho,
+      })
+    );
+  };
 
   const redirectEdit = (id: string) => {
     history.push(`/cidades/editar/${id}`);
@@ -62,7 +76,11 @@ const ListCitiesContainer: FC = () => {
                 }}
               />
             }
-            label={ativo ? "Ativo" : "Inativo"}
+            label={
+              <Typography variant="body2">
+                {ativo ? "Ativo" : "Inativo"}
+              </Typography>
+            }
           />
         </TableCell>
       ),
@@ -86,19 +104,19 @@ const ListCitiesContainer: FC = () => {
 
   return (
     <ContainerComponent>
-      <DrawerFilterComponent />
-      <HeadDatableComponent />
+      <DrawerFilter />
       <DataTableComponent
-        data={data}
-        totalRows={5}
+        data={dataList?.list || []}
+        totalRows={dataList.totalItems}
+        page={dataList.currentPage - 1}
+        rowsPerPage={dataList.size}
         title="Listagem de cidades"
-        filters={[{ label: "teste", propertie: "teste" }]}
+        filters={[]}
         columns={columns}
-        orderPropertie="string"
+        orderPropertie="nome"
         orderDirection="asc"
-        onRowClick={({ id }: { id: string }) => {
-          redirectEdit(id);
-        }}
+        onChangePage={changePage}
+        onChangeRowsPerPage={changeRowsPerPage}
       />
     </ContainerComponent>
   );

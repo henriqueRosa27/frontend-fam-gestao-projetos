@@ -9,8 +9,9 @@ interface InputFieldComponent {
   required?: boolean;
   name: string;
   error?: string;
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 }
 
 const InputFieldComponent: FC<InputFieldComponent> = ({
@@ -21,7 +22,8 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
   error,
   value,
   onChange,
-}: InputFieldComponent) => {
+  placeholder,
+}) => {
   const classes = useStyles({ error: !!error });
   return (
     <div id={`form-group-${id}}`} className={classes.root}>
@@ -35,6 +37,7 @@ const InputFieldComponent: FC<InputFieldComponent> = ({
         fullWidth
         error={!!error}
         variant="outlined"
+        placeholder={placeholder}
         helperText={error}
         value={value}
         onChange={e => {

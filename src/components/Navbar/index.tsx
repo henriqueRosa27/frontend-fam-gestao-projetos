@@ -14,9 +14,7 @@ interface NavbarComponentProps {
   toogleDrawer: () => void;
 }
 
-const NavbarComponent: FC<NavbarComponentProps> = ({
-  toogleDrawer,
-}: NavbarComponentProps) => {
+const NavbarComponent: FC<NavbarComponentProps> = ({ toogleDrawer }) => {
   const classes = useStyles();
 
   return (

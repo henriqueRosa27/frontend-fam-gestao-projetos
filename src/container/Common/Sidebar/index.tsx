@@ -7,10 +7,9 @@ interface SidebarContainerProps {
   toogleDrawer: () => void;
 }
 
-const SidebarContainer: FC<SidebarContainerProps> = ({
-  open,
-  toogleDrawer,
-}: SidebarContainerProps) => {
+type Type = FC<SidebarContainerProps>;
+
+const SidebarContainer: Type = ({ open, toogleDrawer }) => {
   return <SidebarComponent open={open} toogleDrawer={toogleDrawer} />;
 };
 

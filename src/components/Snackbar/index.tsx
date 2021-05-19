@@ -30,12 +30,9 @@ interface DataAlert {
   icon: JSX.Element;
 }
 
-const SnackbarComponent: FC<SnackbarComponentProps> = ({
-  snackbarKey,
-  message,
-  type,
-  storeKey,
-}: SnackbarComponentProps) => {
+type Type = FC<SnackbarComponentProps>;
+
+const SnackbarComponent: Type = ({ snackbarKey, message, type, storeKey }) => {
   const classes = useStyles();
   const { closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();

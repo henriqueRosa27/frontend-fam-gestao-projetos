@@ -8,3 +8,4 @@ export { SidebarComponent } from "./Sidebar";
 export { NavbarComponent } from "./Navbar";
 export { InputFieldComponent } from "./InputField";
 export { ButtonComponent } from "./Button";
+export { InputListComponent } from "./InputList";

@@ -7,16 +7,18 @@ import {
   CityActions,
   CityData,
   ISetModelCity,
+  ISetFilterData,
 } from "./types";
 
 const INITIAL_STATE: CityState = {
-  data: [],
+  dataList: { currentPage: 0, list: [], totalItems: 0, size: 0, totalPage: 0 },
+  filters: { ativo: undefined, nome: undefined },
   model: {} as CityData,
 };
 
 export const { Types, Creators } = createActions<CityActionsTypes, CityActions>(
   {
-    loadCitiesRequest: [],
+    loadCitiesRequest: ["params"],
     loadCitiesSuccess: ["data"],
     createCityRequest: ["nome"],
     changeStatusCityRequest: ["request"],
@@ -24,6 +26,7 @@ export const { Types, Creators } = createActions<CityActionsTypes, CityActions>(
     setModelCity: ["model"],
     loadCityByIdRequest: ["id"],
     updateCityRequest: ["id", "nome"],
+    setFilterData: ["propertie", "value"],
   }
 );
 
@@ -31,7 +34,7 @@ export const loadCitiesSuccess = (
   state: CityState = INITIAL_STATE,
   { data }: ILoadCitiesSuccess
 ): CityState => {
-  return { ...state, data };
+  return { ...state, dataList: data };
 };
 
 export const clearModelCity = (state: CityState = INITIAL_STATE): CityState => {
@@ -44,6 +47,12 @@ export const setModelCity = (
 ): CityState => {
   return { ...state, model };
 };
+export const setFilterData = (
+  state: CityState = INITIAL_STATE,
+  { propertie, value }: ISetFilterData
+): CityState => {
+  return { ...state, filters: { ...state.filters, [propertie]: value } };
+};
 
 // type IActions = ILoadCitiesSuccess;
 
@@ -51,6 +60,7 @@ const handlers = {
   [CityTypes.LOAD_CITIES_SUCCESS]: loadCitiesSuccess,
   [CityTypes.CLEAR_MODEL_CITY]: clearModelCity,
   [CityTypes.SET_MODEL_CITY]: setModelCity,
+  [CityTypes.SET_FILTER_DATA]: setFilterData,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

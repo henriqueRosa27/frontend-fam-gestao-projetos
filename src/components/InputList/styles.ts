@@ -16,10 +16,21 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "4px",
   },
   input: {
-    color: theme.palette.primary.main,
-    outline: "none",
-    "& .MuiOutlinedInput-root": {
-      padding: 10,
+    width: "100%",
+    "& .MuiInput-underline::before": {
+      content: "none",
+    },
+    "& .MuiInput-underline::after": {
+      content: "none",
+      borderBottom: "none",
+    },
+    "& .MuiInputBase-root": {
+      color: theme.palette.primary.main,
+      padding: 5,
+      animationDuration: "0ms",
+      backgroundColor: "#FFFFFF",
+      boxSizing: "border-box",
+      borderRadius: "5px",
       "&:hover fieldset": {
         borderColor: (props: { error: boolean }) =>
           props.error ? theme.palette.error.main : theme.palette.primary.main,
@@ -28,9 +39,6 @@ const useStyles = makeStyles(theme => ({
         borderColor: (props: { error: boolean }) =>
           props.error ? theme.palette.error.main : theme.palette.primary.main,
       },
-    },
-    "& .MuiOutlinedInput-input": {
-      padding: 5,
     },
   },
 }));

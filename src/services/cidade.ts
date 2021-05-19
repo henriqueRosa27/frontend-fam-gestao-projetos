@@ -2,8 +2,15 @@ import api from "./api";
 
 const ROUTE = "cidades";
 
-const getAllCitiesService = async () => {
-  return api.get(ROUTE);
+interface IGetAllCitiesParams {
+  page?: number;
+  size?: number;
+  nome?: string;
+  ativo?: boolean;
+}
+
+const getAllCitiesService = async (params?: IGetAllCitiesParams) => {
+  return api.get(ROUTE, { params });
 };
 
 const getCityById = async (id: string) => {

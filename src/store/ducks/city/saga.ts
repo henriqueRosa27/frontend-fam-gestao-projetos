@@ -1,4 +1,4 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call, select } from "redux-saga/effects";
 
 import {
   getAllCitiesService,
@@ -8,6 +8,7 @@ import {
   getCityById,
   updateCityService,
 } from "src/services/cidade";
+import { getCityState, CityState } from "src/store/selectors";
 import history from "src/routes/history";
 import { Creators as cityCreators } from "./index";
 import { Creators as notificationCreators } from "../notification";
@@ -18,15 +19,35 @@ import {
   IChangeStatusCityRequest,
   ILoadCityByIdRequest,
   IUpdateCityRequest,
+  ILoadCitiesRequest,
 } from "./types";
 
-function* getAllCities() {
+function* getAllCities({ params }: ILoadCitiesRequest) {
   try {
     yield put(globalCreators.openLoading());
 
-    const { data } = yield call(getAllCitiesService);
+    const { dataList, filters }: CityState = yield select(getCityState);
 
-    yield put(cityCreators.loadCitiesSuccess(data));
+    const ativo =
+      filters.ativo === undefined || filters.ativo === -1
+        ? undefined
+        : Boolean(filters.ativo);
+    const { data } = yield call(getAllCitiesService, {
+      page: params?.pagina || dataList.currentPage,
+      size: params?.tamanho || dataList.size,
+      nome: filters.nome,
+      ativo,
+    });
+
+    yield put(
+      cityCreators.loadCitiesSuccess({
+        list: data.items,
+        currentPage: data.current_page,
+        totalPage: data.total_pages,
+        size: data.size,
+        totalItems: data.total_items,
+      })
+    );
   } catch (e) {
     yield put(
       notificationCreators.pushNotification({

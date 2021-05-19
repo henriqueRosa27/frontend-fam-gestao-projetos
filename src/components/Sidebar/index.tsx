@@ -16,7 +16,7 @@ const SidebarComponentT: FC<SidebarComponentProps> = ({
   open,
   toogleDrawer,
   width,
-}: SidebarComponentProps) => {
+}) => {
   const classes = useStyles();
   return (
     <SwipeableDrawer

@@ -9,6 +9,7 @@ import {
   TableSortLabel,
   TableBody,
   Typography,
+  TablePagination,
 } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -26,8 +27,11 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
   orderPropertie,
   orderDirection,
   alterSort,
-  onRowClick,
-}: DataTableComponentProps) => {
+  page,
+  onChangePage,
+  onChangeRowsPerPage,
+  rowsPerPage,
+}) => {
   const classes = useStyles();
 
   const renderColumnDefault = ({
@@ -77,13 +81,6 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
 
   return (
     <div>
-      {totalRows > 0 && (
-        <div className={classes.show}>
-          <span>
-            Exibindo {data.length} de {totalRows} resultados
-          </span>
-        </div>
-      )}
       <Paper className={classes.table}>
         <TableContainer>
           <div className={classes.tableToolBar}>
@@ -117,15 +114,8 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
             <TableBody>
               {data.map(row => (
                 <TableRow
-                  className={clsx(classes.tableRow, {
-                    [classes.tableRowCursor]: onRowClick,
-                  })}
+                  className={classes.tableRow}
                   hover
-                  onClick={() => {
-                    if (onRowClick) {
-                      onRowClick(row);
-                    }
-                  }}
                   tabIndex={-1}
                   key={row.id}>
                   {columns
@@ -143,9 +133,15 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
                           }-${new Date().getTime()}-${Math.random()}`}
                           align={column.align ? column.align : "center"}
                           style={{ cursor: "pointer" }}>
-                          {column.customRenderCellContent
-                            ? column.customRenderCellContent(row)
-                            : row[column.propertie]}
+                          {column.customRenderCellContent ? (
+                            <Typography variant="body2">
+                              {column.customRenderCellContent(row)}
+                            </Typography>
+                          ) : (
+                            <Typography variant="body2">
+                              {row[column.propertie]}
+                            </Typography>
+                          )}
                         </TableCell>
                       );
                     })}
@@ -154,6 +150,23 @@ const DataTableComponent: FC<DataTableComponentProps> = ({
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          component="div"
+          count={totalRows}
+          page={page}
+          rowsPerPageOptions={[5, 10, 25]}
+          labelRowsPerPage="Registros por página"
+          onChangePage={(_, teste) => {
+            if (onChangePage) onChangePage(teste);
+          }}
+          labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} de ${count !== -1 ? count : `mais que ${to}`}`
+          }
+          rowsPerPage={rowsPerPage || 0}
+          onChangeRowsPerPage={event => {
+            if (onChangeRowsPerPage) onChangeRowsPerPage(event.target.value);
+          }}
+        />
       </Paper>
     </div>
   );

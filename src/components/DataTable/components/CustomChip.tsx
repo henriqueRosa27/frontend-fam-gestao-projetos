@@ -20,10 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomChip: FC<CustomChipProps> = ({
-  label,
-  onRemoveFilter,
-}: CustomChipProps) => {
+const CustomChip: FC<CustomChipProps> = ({ label, onRemoveFilter }) => {
   const classes = useStyles();
 
   return (

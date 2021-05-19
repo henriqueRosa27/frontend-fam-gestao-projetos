@@ -8,11 +8,9 @@ interface ButtonComponentProps extends ButtonProps {
   component?: ElementType;
   to?: string;
 }
+type Type = FC<ButtonComponentProps>;
 
-const ButtonComponent: FC<ButtonComponentProps> = ({
-  text,
-  ...props
-}: ButtonComponentProps) => {
+const ButtonComponent: Type = ({ text, ...props }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>

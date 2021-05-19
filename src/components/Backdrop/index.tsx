@@ -8,9 +8,9 @@ interface BackdropComponent {
   open: boolean;
 }
 
-const BackdropComponent: FC<BackdropComponent> = ({
-  open,
-}: BackdropComponent) => {
+type Type = FC<BackdropComponent>;
+
+const BackdropComponent: Type = ({ open }) => {
   const classes = useStyles();
 
   return (

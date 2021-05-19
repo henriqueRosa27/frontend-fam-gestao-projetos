@@ -6,9 +6,9 @@ interface NavbarContainerProps {
   toogleDrawer: () => void;
 }
 
-const NavbarContainer: FC<NavbarContainerProps> = ({
-  toogleDrawer,
-}: NavbarContainerProps) => {
+type Type = FC<NavbarContainerProps>;
+
+const NavbarContainer: Type = ({ toogleDrawer }) => {
   return <NavbarComponent toogleDrawer={toogleDrawer} />;
 };
 

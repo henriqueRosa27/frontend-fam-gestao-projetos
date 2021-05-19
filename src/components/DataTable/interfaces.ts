@@ -9,8 +9,10 @@ interface DataTableComponentProps {
   orderPropertie?: string;
   orderDirection?: "desc" | "asc" | undefined;
   alterSort?: (propertie: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onRowClick?: (data: any) => void;
+  page: number;
+  onChangePage?: (page: number) => void;
+  onChangeRowsPerPage?: (rowsPerPage: string) => void;
+  rowsPerPage?: number;
 }
 
 interface FilterProps {

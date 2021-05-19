@@ -1,3 +1,8 @@
 import { IApplicationState } from "../index";
 
-export const getCityState = (state: IApplicationState) => state.city;
+const getCityState = (state: IApplicationState) => state.city;
+
+type CityState = ReturnType<typeof getCityState>;
+
+export { getCityState };
+export type { CityState };

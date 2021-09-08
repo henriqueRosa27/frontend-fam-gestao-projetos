@@ -8,7 +8,7 @@ import {
   DrawerFilterComponent,
   InputListComponent,
 } from "src/components";
-import { Creators as cityCreator } from "src/store/ducks/city";
+import { actions as cityActions } from "src/store/ducks/city";
 import { getCityState } from "src/store/selectors";
 
 const DrawerFilter: FC = () => {
@@ -20,11 +20,11 @@ const DrawerFilter: FC = () => {
     propertie: "nome" | "ativo",
     value: string | number
   ) => {
-    dispatch(cityCreator.setFilterData(propertie, value));
+    dispatch(cityActions.setFilterData({ propertie, value }));
   };
 
   const handleFilter = () => {
-    dispatch(cityCreator.loadCitiesRequest());
+    dispatch(cityActions.loadCitiesRequest({}));
     setFilterOpen(false);
   };
 

@@ -1,40 +1,46 @@
-import { createActions, createReducer } from "reduxsauce";
+import { createSlice, createAction } from "@reduxjs/toolkit";
 
-import {
-  GlobalState,
-  GlobalActionsTypes,
-  GlobalActions,
-  GlobalTypes,
-} from "./types";
+import { GlobalState, GlobalTypes } from "./types";
 
-const INITIAL_STATE: GlobalState = {
+const initialState: GlobalState = {
   loading: false,
 };
 
-export const { Types, Creators } = createActions<
-  GlobalActionsTypes,
-  GlobalActions
->({
-  openLoading: [],
-  closeLoading: [],
+/**
+ * Actions
+ */
+const openLoading = createAction(GlobalTypes.OPEN_LOADING);
+const closeLoading = createAction(GlobalTypes.CLOSE_LOADING);
+
+/**
+ * Changes state
+ */
+export const openLoadingAction = (state: GlobalState): GlobalState => ({
+  ...state,
+  loading: true,
 });
 
-export const openLoading = (
-  state: GlobalState = INITIAL_STATE
-): GlobalState => {
-  return { ...state, loading: true };
+export const closeLoadingAction = (state: GlobalState): GlobalState => ({
+  ...state,
+  loading: false,
+});
+
+/**
+ * Slice
+ */
+export const globalSlice = createSlice({
+  name: "global",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [GlobalTypes.OPEN_LOADING]: openLoadingAction,
+    [GlobalTypes.CLOSE_LOADING]: closeLoadingAction,
+  },
+});
+
+export const actions = {
+  openLoading,
+  closeLoading,
 };
 
-export const closeLoading = (
-  state: GlobalState = INITIAL_STATE
-): GlobalState => {
-  return { ...state, loading: false };
-};
-
-const handlers = {
-  [GlobalTypes.OPEN_LOADING]: openLoading,
-  [GlobalTypes.CLOSE_LOADING]: closeLoading,
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default createReducer<GlobalState, any>(INITIAL_STATE, handlers);
+export default globalSlice.reducer;

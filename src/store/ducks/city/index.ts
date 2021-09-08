@@ -1,67 +1,101 @@
-import { createActions, createReducer } from "reduxsauce";
-import {
-  CityTypes,
-  ILoadCitiesSuccess,
-  CityState,
-  CityActionsTypes,
-  CityActions,
-  CityData,
-  ISetModelCity,
-  ISetFilterData,
-} from "./types";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CityState, CityData, CityTypes, DataList } from "./types";
 
-const INITIAL_STATE: CityState = {
+const initialState: CityState = {
   dataList: { currentPage: 0, list: [], totalItems: 0, size: 0, totalPage: 0 },
   filters: { ativo: undefined, nome: undefined },
   model: {} as CityData,
 };
 
-export const { Types, Creators } = createActions<CityActionsTypes, CityActions>(
-  {
-    loadCitiesRequest: ["params"],
-    loadCitiesSuccess: ["data"],
-    createCityRequest: ["nome"],
-    changeStatusCityRequest: ["request"],
-    clearModelCity: [],
-    setModelCity: ["model"],
-    loadCityByIdRequest: ["id"],
-    updateCityRequest: ["id", "nome"],
-    setFilterData: ["propertie", "value"],
-  }
+/**
+ * Actions
+ */
+const loadCitiesRequest = createAction<{
+  pagina?: number;
+  tamanho?: number;
+}>(CityTypes.LOAD_CITIES_REQUEST);
+const loadCitiesSuccess = createAction<DataList>(CityTypes.LOAD_CITIES_SUCCESS);
+const createCityRequest = createAction<{ nome: string }>(
+  CityTypes.CREATE_CITY_REQUEST
 );
+const changeStatusCityRequest = createAction<{ id: string; status: boolean }>(
+  CityTypes.CHANGE_STATUS_CITY_REQUEST
+);
+const clearModelCity = createAction(CityTypes.CLEAR_MODEL_CITY);
+const setModelCity = createAction<CityData>(CityTypes.SET_MODEL_CITY);
+const loadCityByIdRequest = createAction<{ id: string }>(
+  CityTypes.LOAD_CITY_BY_ID_REQUEST
+);
+const updateCityRequest = createAction<{ id: string; nome: string }>(
+  CityTypes.UPDATE_CITY_REQUEST
+);
+const setFilterData = createAction<{
+  propertie: "nome" | "ativo";
+  value: string | number | undefined;
+}>(CityTypes.SET_FILTER_DATA);
 
-export const loadCitiesSuccess = (
-  state: CityState = INITIAL_STATE,
-  { data }: ILoadCitiesSuccess
-): CityState => {
-  return { ...state, dataList: data };
+/**
+ * Changes state
+ */
+const loadCitiesSuccessAction = (
+  state: CityState,
+  { payload }: PayloadAction<DataList>
+): CityState => ({
+  ...state,
+  dataList: payload,
+});
+
+const clearModelCityAction = (state: CityState): CityState => ({
+  ...state,
+  model: initialState.model,
+});
+
+const setModelCityAction = (
+  state: CityState,
+  { payload }: PayloadAction<CityData>
+): CityState => ({
+  ...state,
+  model: payload,
+});
+
+const setFilterDataAction = (
+  state: CityState,
+  {
+    payload,
+  }: PayloadAction<{
+    propertie: "nome" | "ativo";
+    value: string | number | undefined;
+  }>
+): CityState => ({
+  ...state,
+  filters: { ...state.filters, [payload.propertie]: payload.value },
+});
+
+/**
+ * Slice
+ */
+export const citySlice = createSlice({
+  name: "city",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [CityTypes.LOAD_CITIES_SUCCESS]: loadCitiesSuccessAction,
+    [CityTypes.CLEAR_MODEL_CITY]: clearModelCityAction,
+    [CityTypes.SET_MODEL_CITY]: setModelCityAction,
+    [CityTypes.SET_FILTER_DATA]: setFilterDataAction,
+  },
+});
+
+export const actions = {
+  loadCitiesRequest,
+  loadCitiesSuccess,
+  createCityRequest,
+  changeStatusCityRequest,
+  clearModelCity,
+  setModelCity,
+  loadCityByIdRequest,
+  updateCityRequest,
+  setFilterData,
 };
 
-export const clearModelCity = (state: CityState = INITIAL_STATE): CityState => {
-  return { ...state, model: INITIAL_STATE.model };
-};
-
-export const setModelCity = (
-  state: CityState = INITIAL_STATE,
-  { model }: ISetModelCity
-): CityState => {
-  return { ...state, model };
-};
-export const setFilterData = (
-  state: CityState = INITIAL_STATE,
-  { propertie, value }: ISetFilterData
-): CityState => {
-  return { ...state, filters: { ...state.filters, [propertie]: value } };
-};
-
-// type IActions = ILoadCitiesSuccess;
-
-const handlers = {
-  [CityTypes.LOAD_CITIES_SUCCESS]: loadCitiesSuccess,
-  [CityTypes.CLEAR_MODEL_CITY]: clearModelCity,
-  [CityTypes.SET_MODEL_CITY]: setModelCity,
-  [CityTypes.SET_FILTER_DATA]: setFilterData,
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default createReducer<CityState, any>(INITIAL_STATE, handlers);
+export default citySlice.reducer;

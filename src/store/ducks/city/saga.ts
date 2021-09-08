@@ -10,21 +10,21 @@ import {
 } from "src/services/cidade";
 import { getCityState, CityState } from "src/store/selectors";
 import history from "src/routes/history";
-import { Creators as cityCreators } from "./index";
-import { Creators as notificationCreators } from "../notification";
-import { Creators as globalCreators } from "../global";
+import { actions as cityActions } from "./index";
+import { actions as notificationActions } from "../notification";
+import { actions as globalActions } from "../global";
 import {
   CityTypes,
-  ICreateCityRequest,
   IChangeStatusCityRequest,
+  ICreateCityRequest,
+  ILoadCitiesRequest,
   ILoadCityByIdRequest,
   IUpdateCityRequest,
-  ILoadCitiesRequest,
 } from "./types";
 
-function* getAllCities({ params }: ILoadCitiesRequest) {
+function* getAllCities({ payload }: ILoadCitiesRequest) {
   try {
-    yield put(globalCreators.openLoading());
+    yield put(globalActions.openLoading());
 
     const { dataList, filters }: CityState = yield select(getCityState);
 
@@ -33,24 +33,23 @@ function* getAllCities({ params }: ILoadCitiesRequest) {
         ? undefined
         : Boolean(filters.ativo);
     const { data } = yield call(getAllCitiesService, {
-      page: params?.pagina || dataList.currentPage,
-      size: params?.tamanho || dataList.size,
+      page: payload?.pagina || dataList.currentPage,
+      size: payload?.tamanho || dataList.size,
       nome: filters.nome,
       ativo,
     });
-
     yield put(
-      cityCreators.loadCitiesSuccess({
-        list: data.items,
-        currentPage: data.current_page,
-        totalPage: data.total_pages,
-        size: data.size,
-        totalItems: data.total_items,
+      cityActions.loadCitiesSuccess({
+        list: data,
+        currentPage: 2,
+        totalPage: 2,
+        size: 2,
+        totalItems: 2,
       })
     );
   } catch (e) {
     yield put(
-      notificationCreators.pushNotification({
+      notificationActions.pushNotification({
         type: "error",
         content: {
           title: "Erro inesperado",
@@ -59,18 +58,18 @@ function* getAllCities({ params }: ILoadCitiesRequest) {
       })
     );
   } finally {
-    yield put(globalCreators.closeLoading());
+    yield put(globalActions.closeLoading());
   }
 }
 
-function* createCity({ nome }: ICreateCityRequest) {
+function* createCity({ payload: { nome } }: ICreateCityRequest) {
   try {
-    yield put(globalCreators.openLoading());
+    yield put(globalActions.openLoading());
     const data = { nome };
     yield call(createCityService, data);
 
     yield put(
-      notificationCreators.pushNotification({
+      notificationActions.pushNotification({
         type: "success",
         content: {
           title: "Sucesso",
@@ -82,14 +81,14 @@ function* createCity({ nome }: ICreateCityRequest) {
   } catch (e) {
     if (e?.response && e.response?.status === 422) {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: { title: "Erro", content: e.response.data.Erros },
         })
       );
     } else {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: {
             title: "Erro inesperado",
@@ -99,23 +98,25 @@ function* createCity({ nome }: ICreateCityRequest) {
       );
     }
   } finally {
-    yield put(globalCreators.closeLoading());
+    yield put(globalActions.closeLoading());
   }
 }
 
-function* changeStatusCity({ request }: IChangeStatusCityRequest) {
+function* changeStatusCity({
+  payload: { id, status },
+}: IChangeStatusCityRequest) {
   try {
-    yield put(globalCreators.openLoading());
-    if (request.status) {
-      yield call(inactivateCitiesService, request.id);
+    yield put(globalActions.openLoading());
+    if (status) {
+      yield call(inactivateCitiesService, id);
     } else {
-      yield call(activateCityService, request.id);
+      yield call(activateCityService, id);
     }
 
-    yield put(cityCreators.loadCitiesRequest());
+    yield put(cityActions.loadCitiesRequest({}));
   } catch (e) {
     yield put(
-      notificationCreators.pushNotification({
+      notificationActions.pushNotification({
         type: "error",
         content: {
           title: "Erro inesperado",
@@ -124,19 +125,19 @@ function* changeStatusCity({ request }: IChangeStatusCityRequest) {
       })
     );
   } finally {
-    yield put(globalCreators.closeLoading());
+    yield put(globalActions.closeLoading());
   }
 }
 
-function* loadCityById({ id }: ILoadCityByIdRequest) {
+function* loadCityById({ payload: { id } }: ILoadCityByIdRequest) {
   try {
-    yield put(globalCreators.openLoading());
+    yield put(globalActions.openLoading());
     const { data } = yield call(getCityById, id);
-    yield put(cityCreators.setModelCity(data));
+    yield put(cityActions.setModelCity(data));
   } catch (e) {
     if (e?.response && e.response?.status === 404) {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: { title: "Erro", content: "Cidade não existe" },
         })
@@ -144,7 +145,7 @@ function* loadCityById({ id }: ILoadCityByIdRequest) {
       history.push("/cidades");
     } else {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: {
             title: "Erro inesperado",
@@ -154,18 +155,18 @@ function* loadCityById({ id }: ILoadCityByIdRequest) {
       );
     }
   } finally {
-    yield put(globalCreators.closeLoading());
+    yield put(globalActions.closeLoading());
   }
 }
 
-function* updateCity({ id, nome }: IUpdateCityRequest) {
+function* updateCity({ payload: { id, nome } }: IUpdateCityRequest) {
   try {
-    yield put(globalCreators.openLoading());
+    yield put(globalActions.openLoading());
     const data = { nome };
     yield call(updateCityService, id, data);
 
     yield put(
-      notificationCreators.pushNotification({
+      notificationActions.pushNotification({
         type: "success",
         content: {
           title: "Sucesso",
@@ -177,14 +178,14 @@ function* updateCity({ id, nome }: IUpdateCityRequest) {
   } catch (e) {
     if (e?.response && e.response?.status === 422) {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: { title: "Erro", content: e.response.data.Erros },
         })
       );
     } else {
       yield put(
-        notificationCreators.pushNotification({
+        notificationActions.pushNotification({
           type: "error",
           content: {
             title: "Erro inesperado",
@@ -194,7 +195,7 @@ function* updateCity({ id, nome }: IUpdateCityRequest) {
       );
     }
   } finally {
-    yield put(globalCreators.closeLoading());
+    yield put(globalActions.closeLoading());
   }
 }
 

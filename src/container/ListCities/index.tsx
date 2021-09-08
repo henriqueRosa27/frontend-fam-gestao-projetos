@@ -10,7 +10,7 @@ import {
 import { Edit as EditIcon } from "@material-ui/icons";
 
 import { DataTableComponent, ContainerComponent } from "src/components";
-import { Creators as cityCreator } from "src/store/ducks/city";
+import { actions as cityActions } from "src/store/ducks/city";
 import { getCityState } from "src/store/selectors";
 import { ColumnProps } from "src/components/interfaces";
 import history from "src/routes/history";
@@ -21,12 +21,12 @@ const ListCitiesContainer: FC = () => {
   const { dataList } = useSelector(getCityState);
 
   useEffect(() => {
-    dispatch(cityCreator.loadCitiesRequest());
+    dispatch(cityActions.loadCitiesRequest({}));
   }, [dispatch]);
 
   const changePage = (page: number) => {
     dispatch(
-      cityCreator.loadCitiesRequest({
+      cityActions.loadCitiesRequest({
         pagina: page + 1,
         tamanho: dataList.size,
       })
@@ -35,7 +35,7 @@ const ListCitiesContainer: FC = () => {
 
   const changeRowsPerPage = (tamanho: string) => {
     dispatch(
-      cityCreator.loadCitiesRequest({
+      cityActions.loadCitiesRequest({
         pagina: 1,
         tamanho: +tamanho,
       })
@@ -71,7 +71,7 @@ const ListCitiesContainer: FC = () => {
                 color="primary"
                 onChange={() => {
                   dispatch(
-                    cityCreator.changeStatusCityRequest({ id, status: ativo })
+                    cityActions.changeStatusCityRequest({ id, status: ativo })
                   );
                 }}
               />

@@ -12,7 +12,7 @@ import { Box, IconButton } from "@material-ui/core";
 import { SnackbarContent, SnackbarKey, useSnackbar } from "notistack";
 import clsx from "clsx";
 
-import { Creators as notificationCreators } from "../../store/ducks/notification";
+import { actions as notificationActions } from "../../store/ducks/notification";
 import { useStyles } from "./styles";
 
 interface SnackbarComponentProps {
@@ -79,7 +79,9 @@ const SnackbarComponent: Type = ({ snackbarKey, message, type, storeKey }) => {
               aria-label="close"
               size="medium"
               onClick={() => {
-                dispatch(notificationCreators.closeNotification(storeKey));
+                dispatch(
+                  notificationActions.closeNotification({ key: storeKey })
+                );
                 closeSnackbar(snackbarKey);
               }}>
               <CloseIcon fontSize="inherit" />

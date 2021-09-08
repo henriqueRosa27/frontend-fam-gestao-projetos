@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 import { InputFieldComponent, ButtonComponent } from "src/components";
 import { NoteIcon } from "src/assets/icons";
-import { Creators as cityCreators } from "src/store/ducks/city";
+import { actions as cityActions } from "src/store/ducks/city";
 import history from "src/routes/history";
 import { getCityState } from "src/store/selectors";
 import { useStyles } from "./styles";
@@ -31,9 +31,9 @@ const FormCitiesContainer: FC = () => {
   });
 
   useEffect(() => {
-    dispatch(cityCreators.clearModelCity());
+    dispatch(cityActions.clearModelCity());
     if (id) {
-      dispatch(cityCreators.loadCityByIdRequest(id));
+      dispatch(cityActions.loadCityByIdRequest({ id }));
     }
   }, [dispatch, id]);
 
@@ -45,9 +45,9 @@ const FormCitiesContainer: FC = () => {
 
   const submit = ({ nome }: { nome: string }) => {
     if (id) {
-      dispatch(cityCreators.updateCityRequest(id, nome));
+      dispatch(cityActions.updateCityRequest({ id, nome }));
     } else {
-      dispatch(cityCreators.createCityRequest(nome));
+      dispatch(cityActions.createCityRequest({ nome }));
     }
   };
 
